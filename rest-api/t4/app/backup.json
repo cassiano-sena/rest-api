@@ -1,0 +1,10 @@
+{
+  "name": "generateToken",
+  "param": {
+    "email": "cassiano@email.com",
+    "pass": "cassiano"
+  }
+}
+
+//http://127.0.0.1/pw/t4/app
+//http://127.0.0.1/pw/t4/app/db/connect.php
