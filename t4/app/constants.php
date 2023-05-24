@@ -18,6 +18,12 @@
     define('API_PARAM_REQUIRED',106);
     define('API_DOES_NOT_EXIST',107);
     define('INVALID_USER_PASS',108);
-    define('SUCCES_RESPONSE',200);
+    define('USER_IS_ACTIVE',109);
+    define('LIMITED_USER_ACCESS',110);
+    define('JWT_PROCESSING_ERROR',111);
+
+    define('SUCCESS_RESPONSE',200);
 
     // Server Errors
+    define('AUTHORIZATION_HEADER_NOT_FOUND',300);
+    define('ACCESS_TOKEN_ERROR',301);
