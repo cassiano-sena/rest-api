@@ -48,7 +48,11 @@
             $telefone=$this->validateParameters('telefone',$this->param['telefone'],STRING,false);
             try{
                 //precisa de token, chave secreta e o algoritmo
-                echo $token=$this->getBearerToken();
+                //talvez nao esteja executando a funcao getbearertoken
+                //echo $token=$this->getBearerToken();
+                $token=$this->getBearerToken();
+                $payload=JWT::decode($token,SECRET_KEY,['HS256']);
+                print_r($payload);
             }catch(Exception $e){
                 $this->throwError(ACCESS_TOKEN_ERROR,$e->getMessage());
             }
