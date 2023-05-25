@@ -5,6 +5,9 @@ pw_t4 redo backend only
 * Para habilitar o modo de POST-ONLY, descomentar 'rest.api' 14-16;
 */
 
+
+
+
 Para gerar um token: 
 {
   "name": "generateToken",
@@ -21,12 +24,20 @@ Para gerar um token:
   }
 }
 
+
+
+
+
 Copiar o Token 
 Vá para 'Headers'
 Escreva "Content-Type" "application/json"
 Escreva "Authorization" "Bearer (token)"
 
 Se o token for válido, você terá acesso por 15 minutos
+
+
+
+
 
 //Para gerenciar usuários
 {
@@ -43,6 +54,10 @@ Se o token for válido, você terá acesso por 15 minutos
     "created_on": ""
   }
 }
+
+
+
+
 {
   "name": "addUsuario",
   "param": {
@@ -64,6 +79,10 @@ Se o token for válido, você terá acesso por 15 minutos
     "id": "(id)"
   }
 }
+
+
+
+
 
 //Para gerenciar rotas
 {
@@ -88,6 +107,10 @@ Se o token for válido, você terá acesso por 15 minutos
     "id": "(id)"
   }
 }
+
+
+
+
 
 //Para gerenciar mensagens
 {
