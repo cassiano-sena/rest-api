@@ -1,0 +1,31 @@
+{
+  "name": "generateToken",
+  "param": {
+    "email": "cassiano@email.com",
+    "senha": "cassiano"
+  }
+}
+
+{
+  "name": "addUsuario",
+  "param": {
+    "nome": "Daniel",
+    "email": "daniel@email.com",
+    "telefone": "daniel"
+  }
+}
+
+{
+  "name": "addUsuario",
+  "param": {
+    "nome": "Daniel",
+    "email": "daniel@email.com",
+    "telefone": "1234-5678",
+    "senha": "daniel"
+  }
+}
+
+//http://127.0.0.1/pw/t4/app
+//http://127.0.0.1/pw/t4/app/db/connect.php
+//Content-Type application/json
+//Authorization Bearer (token)
