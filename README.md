@@ -5,7 +5,12 @@ pw_t4 redo backend only
 * Para habilitar o modo de POST-ONLY, descomentar 'rest.api' 14-16;
 */
 
+
+
+
 Para gerar um token: 
+(senha está sem case-sensitivity)
+
 {
   "name": "generateToken",
   "param": {
@@ -21,6 +26,10 @@ Para gerar um token:
   }
 }
 
+
+
+
+
 Copiar o Token 
 Vá para 'Headers'
 Escreva "Content-Type" "application/json"
@@ -28,36 +37,51 @@ Escreva "Authorization" "Bearer (token)"
 
 Se o token for válido, você terá acesso por 15 minutos
 
+
+
+
+
 //Para gerenciar usuários
+//OK
 {
   "name": "addUsuario",
   "param": {
-    "nome": "Daniel",
-    "email": "daniel@email.com",
-    "telefone": "1234-5678",
-    "senha": "daniel",
+    "nome": "1",
+    "email": "2",
+    "telefone": "3",
+    "senha": "4",
     "is_admin": "0",
     "is_driver": "0",
-    "ativo": "0",
-    "status": "A",
-    "created_on": "2020-12-31"
+    "is_active": "0",
+    "status": "A"
   }
 }
-{
-  "name": "addUsuario",
-  "param": {
-    "nome": "Daniel",
-    "email": "daniel@email.com",
-    "telefone": "1234-5678",
-    "senha": "daniel"
-  }
-}
+
+//TODO
 {
   "name": "getUsuarioDetails",
   "param": {
-    "id": "(id)"
+    "id": ""
   }
 }
+
+//TODO
+{
+  "name": "updateUsuario",
+  "param": {
+    "id": "",
+    "nome": "",
+    "email": "",
+    "telefone": "",
+    "senha": "",
+    "is_admin": "",
+    "is_driver": "",
+    "is_active": "",
+    "status": ""
+  }
+}
+
+//OK
 {
   "name": "deleteUsuario",
   "param": {
@@ -65,48 +89,94 @@ Se o token for válido, você terá acesso por 15 minutos
   }
 }
 
+
+
+
+
 //Para gerenciar rotas
+//OK
 {
   "name": "addRota",
   "param": {
-    "rota": "",
-    "veiculo": "",
-    "motorista": "",
-    "datas": "",
-    "horarios": ""
+    "rota": "1",
+    "veiculo": "2",
+    "motorista": "3",
+    "datas": "4",
+    "horarios": "5",
+    "status": "A"
   }
 }
+
+//TODO
 {
   "name": "getRotaDetails",
   "param": {
     "id": "(id)"
   }
 }
+
+//TODO
 {
-  "name": "deleteRota",
+  "name": "updateRota",
   "param": {
-    "id": "(id)"
+    "id": "",
+    "rota": "0",
+    "veiculo": "0",
+    "motorista": "0",
+    "datas": "0",
+    "horarios": "0",
+    "status": "A"
   }
 }
 
+//OK
+{
+  "name": "deleteRota",
+  "param": {
+    "id": ""
+  }
+}
+
+
+
+
+
 //Para gerenciar mensagens
+//OK
 {
   "name": "addMensagem",
   "param": {
-    "usuario": "",
-    "rota": "",
-    "descricao": ""
+    "usuario": "1",
+    "rota": "1",
+    "descricao": "a",
+    "status": "A"
   }
 }
+
+//TODO
 {
   "name": "getMensagemDetails",
   "param": {
-    "id": "(id)"
+    "id": ""
   }
 }
+
+//TODO
+{
+  "name": "updateMensagem",
+  "param": {
+    "id": "",
+    "usuario": "2",
+    "rota": "2",
+    "descricao": "B",
+    "status": "I"
+  }
+}
+
+//OK
 {
   "name": "deleteMensagem",
   "param": {
-    "id": "(id)"
+    "id": ""
   }
 }
