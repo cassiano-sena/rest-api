@@ -1,18 +1,18 @@
 <?php
     class Rota{
-        private $id;
+        private $rota_id;
         private $rota;
         private $veiculo;
         private $motorista;
         private $datas;
         private $horarios;
-        private $status;
+        private $rota_status;
         private $createdOn;
         private $tableName='tab_rotas';
         private $dbConn;
 
-        function setId($id){$this->id=$id;}
-        function getId(){return $this->id;}
+        function setId($rota_id){$this->rota_id=$rota_id;}
+        function getId(){return $this->rota_id;}
         function setRota($rota){$this->rota=$rota;}
         function getRota(){return $this->rota;}
         function setVeiculo($veiculo){$this->veiculo=$veiculo;}
@@ -23,8 +23,8 @@
         function getDatas(){return $this->datas;}
         function setHorarios($horarios){$this->horarios=$horarios;}
         function getHorarios(){return $this->horarios;}
-        function setStatus($status){$this->status=$status;}
-        function getStatus(){return $this->status;}
+        function setStatus($rota_status){$this->rota_status=$rota_status;}
+        function getStatus(){return $this->rota_status;}
         function setCreatedOn($createdOn){$this->createdOn=$createdOn;}
         function getCreatedOn(){return $this->createdOn;}
         function setTableName($tableName){$this->tableName=$tableName;}
@@ -41,29 +41,29 @@
         public function getAllRotas(){
             $stmt=$this->dbConn->prepare("SELECT * FROM ".$this->tableName);
             $stmt->execute();
-            $usuarios=$stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $usuarios;
+            $rotas=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $rotas;
         }
 
         // listar uma rota
         public function getRotaById(){
-            $stmt=$this->dbConn->prepare('SELECT FROM '.$this->tableName.' WHERE id = :id');
-            $stmt->bindParam(':id',$this->id);
+            $stmt=$this->dbConn->prepare('SELECT * FROM '.$this->tableName.' WHERE rota_id = :rota_id');
+            $stmt->bindParam(':rota_id',$this->rota_id);
             $stmt->execute();
-            $rota=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            $rota=$stmt->fetch(PDO::FETCH_ASSOC);
             return $rota;
         }
 
         // inserir no banco
         public function insert(){
-            $sql='INSERT INTO '.$this->tableName.'(id, rota, veiculo, motorista, datas, horarios, status, created_on) VALUES(null, :rota, :veiculo, :motorista, :datas, :horarios, :status, :created_on)';
+            $sql='INSERT INTO '.$this->tableName.'(rota_id, rota, veiculo, motorista, datas, horarios, rota_status, created_on) VALUES(null, :rota, :veiculo, :motorista, :datas, :horarios, :rota_status, :created_on)';
             $stmt=$this->dbConn->prepare($sql);
             $stmt->bindParam(':rota',$this->rota);
             $stmt->bindParam(':veiculo',$this->veiculo);
             $stmt->bindParam(':motorista',$this->motorista);
             $stmt->bindParam(':datas',$this->datas);
             $stmt->bindParam(':horarios',$this->horarios);
-            $stmt->bindParam(':status',$this->status);
+            $stmt->bindParam(':rota_status',$this->rota_status);
             $stmt->bindParam(':created_on',$this->createdOn);
 
             if($stmt->execute()){
@@ -93,15 +93,15 @@
                 $sql.= " horarios = '".$this->getHorarios()."',";
             }
             if(null!=$this->getStatus()){
-                $sql.= " status = '".$this->getStatus()."',";
+                $sql.= " rota_status = '".$this->getStatus()."' ";// retirar virgula
             }
-            // if(null!=$this->getCreatedOn()){
-            //     $sql.= " created_on = '".$this->getCreatedOn()."',";
-            // }
-            $sql.=" WHERE id = :id";
+            if(null!=$this->getCreatedOn()){
+                $sql.= " created_on = '".$this->getCreatedOn()."' ";// retirar virgula
+            }
+            $sql.=" WHERE rota_id = :rota_id";
 
             $stmt=$this->dbConn->prepare($sql);
-            $stmt->bindParam(':id',$this->id);
+            $stmt->bindParam(':rota_id',$this->rota_id);
 
             if($stmt->execute()){
                 return true;
@@ -112,8 +112,8 @@
         
         // deletar no banco
         public function delete(){
-            $stmt= $this->dbConn->prepare('DELETE FROM '.$this->getTableName().' WHERE id = :id');
-            $stmt->bindParam(':id',$this->id);
+            $stmt= $this->dbConn->prepare('DELETE FROM '.$this->getTableName().' WHERE rota_id = :rota_id');
+            $stmt->bindParam(':rota_id',$this->rota_id);
             
             if($stmt->execute()){
                 return true;

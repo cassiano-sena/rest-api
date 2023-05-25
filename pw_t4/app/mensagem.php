@@ -1,33 +1,33 @@
 <?php
     class Mensagem{
-        private $id;
+        private $mensagem_id;
         private $usuario;
         private $veiculo;
         private $rota;
-        private $data;
+        private $mensagem_data;
         private $hora;
         private $descricao;
-        private $status;
+        private $mensagem_status;
         private $createdOn;
         private $tableName='tab_mensagens';
         private $dbConn;
 
-        function setId($id){$this->id=$id;}
-        function getId(){return $this->id;}
+        function setId($mensagem_id){$this->mensagem_id=$mensagem_id;}
+        function getId(){return $this->mensagem_id;}
         function setUsuario($usuario){$this->usuario=$usuario;}
         function getUsuario(){return $this->usuario;}
         function setVeiculo($veiculo){$this->veiculo=$veiculo;}
         function getVeiculo(){return $this->veiculo;}
         function setRota($rota){$this->rota=$rota;}
         function getRota(){return $this->rota;}
-        function setData($data){$this->data=$data;}
-        function getData(){return $this->data;}
+        function setData($mensagem_data){$this->mensagem_data=$mensagem_data;}
+        function getData(){return $this->mensagem_data;}
         function setDescricao($descricao){$this->descricao=$descricao;}
         function getDescricao(){return $this->descricao;}
         function setHora($hora){$this->hora=$hora;}
         function getHora(){return $this->hora;}
-        function setStatus($status){$this->status=$status;}
-        function getStatus(){return $this->status;}
+        function setStatus($mensagem_status){$this->mensagem_status=$mensagem_status;}
+        function getStatus(){return $this->mensagem_status;}
         function setCreatedOn($createdOn){$this->createdOn=$createdOn;}
         function getCreatedOn(){return $this->createdOn;}
         function setTableName($tableName){$this->tableName=$tableName;}
@@ -44,29 +44,29 @@
         public function getAllMensagens(){
             $stmt=$this->dbConn->prepare("SELECT * FROM ".$this->tableName);
             $stmt->execute();
-            $usuarios=$stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $usuarios;
+            $mensagens=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $mensagens;
         }
 
         // listar uma mensagem
         public function getMensagemById(){
-            $stmt=$this->dbConn->prepare('SELECT FROM '.$this->tableName.' WHERE id = :id');
-            $stmt->bindParam(':id',$this->id);
+            $stmt=$this->dbConn->prepare('SELECT * FROM '.$this->tableName.' WHERE mensagem_id = :mensagem_id');
+            $stmt->bindParam(':mensagem_id',$this->mensagem_id);
             $stmt->execute();
-            $mensagem=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            $mensagem=$stmt->fetch(PDO::FETCH_ASSOC);
             return $mensagem;
         }
 
         // inserir no banco
         public function insert(){
-            $sql='INSERT INTO '.$this->tableName.'(id, usuario, rota, data, hora, descricao, status, created_on) VALUES(null, :usuario, :rota, :data, :hora, :descricao, :status, :created_on)';
+            $sql='INSERT INTO '.$this->tableName.'(mensagem_id, usuario, rota, mensagem_data, hora, descricao, mensagem_status, created_on) VALUES(null, :usuario, :rota, :mensagem_data, :hora, :descricao, :mensagem_status, :created_on)';
             $stmt=$this->dbConn->prepare($sql);
             $stmt->bindParam(':usuario',$this->usuario);
             $stmt->bindParam(':rota',$this->rota);
-            $stmt->bindParam(':data',$this->data);
+            $stmt->bindParam(':mensagem_data',$this->mensagem_data);
             $stmt->bindParam(':hora',$this->hora);
             $stmt->bindParam(':descricao',$this->descricao);
-            $stmt->bindParam(':status',$this->status);
+            $stmt->bindParam(':mensagem_status',$this->mensagem_status);
             $stmt->bindParam(':created_on',$this->createdOn);
 
             if($stmt->execute()){
@@ -87,7 +87,7 @@
                 $sql.= " rota = '".$this->getRota()."',";
             }
             if(null!=$this->getData()){
-                $sql.= " data = '".$this->getData()."',";
+                $sql.= " mensagem_data = '".$this->getData()."',";
             }
             if(null!=$this->getHora()){
                 $sql.= " hora = '".$this->getHora()."',";
@@ -96,15 +96,15 @@
                 $sql.= " descricao = '".$this->getDescricao()."',";
             }
             if(null!=$this->getStatus()){
-                $sql.= " status = '".$this->getStatus()."',";
+                $sql.= " mensagem_status = '".$this->getStatus()."' ";// retirar virgula
             }
-            // if(null!=$this->getCreatedOn()){
-            //     $sql.= " created_on = '".$this->getCreatedOn()."',";
-            // }
-            $sql.=" WHERE id = :id";
+            if(null!=$this->getCreatedOn()){
+                $sql.= " created_on = '".$this->getCreatedOn()."' ";// retirar virgula
+            }
+            $sql.=" WHERE mensagem_id = :mensagem_id";
 
             $stmt=$this->dbConn->prepare($sql);
-            $stmt->bindParam(':id',$this->id);
+            $stmt->bindParam(':mensagem_id',$this->mensagem_id);
 
             if($stmt->execute()){
                 return true;
@@ -115,8 +115,8 @@
         
         // deletar no banco
         public function delete(){
-            $stmt= $this->dbConn->prepare('DELETE FROM '.$this->getTableName().' WHERE id = :id');
-            $stmt->bindParam(':id',$this->id);
+            $stmt= $this->dbConn->prepare('DELETE FROM '.$this->getTableName().' WHERE mensagem_id = :mensagem_id');
+            $stmt->bindParam(':mensagem_id',$this->mensagem_id);
             
             if($stmt->execute()){
                 return true;

@@ -3,6 +3,7 @@ pw_t4 redo backend only
 
 /**
 * Para habilitar o modo de POST-ONLY, descomentar 'rest.api' 14-16;
+* Caso haja problema na conexão com o banco, trocar a senha da database em dbconnect.php
 */
 
 
@@ -53,31 +54,32 @@ Se o token for válido, você terá acesso por 15 minutos
     "is_admin": "0",
     "is_driver": "0",
     "is_active": "0",
-    "status": "A"
+    "usuario_status": "A"
   }
 }
 
-//TODO
+//OK
 {
   "name": "getUsuarioDetails",
   "param": {
-    "id": ""
+    "usuario_id":1
   }
 }
 
-//TODO
+//OK
 {
   "name": "updateUsuario",
   "param": {
-    "id": "",
-    "nome": "",
-    "email": "",
-    "telefone": "",
-    "senha": "",
-    "is_admin": "",
-    "is_driver": "",
-    "is_active": "",
-    "status": ""
+    "usuario_id": "1",
+    "nome": "2",
+    "email": "3",
+    "telefone": "4",
+    "senha": "5",
+    "is_admin": "0",
+    "is_driver": "0",
+    "is_active": "0",
+    "usuario_status": "A",
+    "created_on":""
   }
 }
 
@@ -85,7 +87,7 @@ Se o token for válido, você terá acesso por 15 minutos
 {
   "name": "deleteUsuario",
   "param": {
-    "id": "(id)"
+    "usuario_id": ""
   }
 }
 
@@ -103,29 +105,29 @@ Se o token for válido, você terá acesso por 15 minutos
     "motorista": "3",
     "datas": "4",
     "horarios": "5",
-    "status": "A"
+    "rota_status": "A"
   }
 }
 
-//TODO
+//OK
 {
   "name": "getRotaDetails",
   "param": {
-    "id": "(id)"
+    "rota_id": ""
   }
 }
 
-//TODO
+//OK
 {
   "name": "updateRota",
   "param": {
-    "id": "",
+    "rota_id": "1",
     "rota": "0",
     "veiculo": "0",
     "motorista": "0",
     "datas": "0",
     "horarios": "0",
-    "status": "A"
+    "rota_status": "A"
   }
 }
 
@@ -133,7 +135,7 @@ Se o token for válido, você terá acesso por 15 minutos
 {
   "name": "deleteRota",
   "param": {
-    "id": ""
+    "rota_id": "3"
   }
 }
 
@@ -149,34 +151,37 @@ Se o token for válido, você terá acesso por 15 minutos
     "usuario": "1",
     "rota": "1",
     "descricao": "a",
-    "status": "A"
-  }
-}
-
-//TODO
-{
-  "name": "getMensagemDetails",
-  "param": {
-    "id": ""
-  }
-}
-
-//TODO
-{
-  "name": "updateMensagem",
-  "param": {
-    "id": "",
-    "usuario": "2",
-    "rota": "2",
-    "descricao": "B",
-    "status": "I"
+    "mensagem_status": "A"
   }
 }
 
 //OK
 {
+  "name": "getMensagemDetails",
+  "param": {
+    "mensagem_id": "3"
+  }
+}
+
+//OK
+{
+  "name": "updateMensagem",
+  "param": {
+    "mensagem_id": "3",
+    "usuario": "2",
+    "rota": "2",
+    "mensagem_data": "",
+    "hora": "",
+    "descricao": "B",
+    "mensagem_status": "I"
+  }
+}
+
+
+//OK
+{
   "name": "deleteMensagem",
   "param": {
-    "id": ""
+    "mensagem_id": ""
   }
 }
