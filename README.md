@@ -36,11 +36,11 @@ Se o token for válido, você terá acesso por 15 minutos
     "email": "daniel@email.com",
     "telefone": "1234-5678",
     "senha": "daniel",
-    "is_admin": "",
-    "is_driver": "",
-    "ativo": "",
-    "status": "",
-    "created_on": ""
+    "is_admin": "0",
+    "is_driver": "0",
+    "ativo": "0",
+    "status": "A",
+    "created_on": "2020-12-31"
   }
 }
 {

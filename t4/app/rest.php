@@ -43,14 +43,7 @@ require_once('constants.php');
             }
             $this->param=$data['param'];
         }
-        public function processApi(){
-            $api=new Api;
-            $rMethod=new reflectionMethod('API',$this->serviceName);
-            if(!method_exists($api,$this->serviceName)){
-                $this->throwError(API_DOES_NOT_EXIST,"API does not exist.");
-            }
-            $rMethod->invoke($api);
-        }
+        
         // validar parametros passados
         public function validateParameter($fieldName,$value,$dataType,$required=true){
             if($required==true && empty($value)==true){
@@ -82,6 +75,7 @@ require_once('constants.php');
             }
             return $value;
         }
+
         // validar um token
         // necessario para todos os servicos menos gerar-token
         public function validateToken(){
@@ -107,18 +101,35 @@ require_once('constants.php');
             }
         }
 
+        public function processApi(){
+            try {
+                $api=new Api;
+                $rMethod=new reflectionMethod('Api',$this->serviceName);
+                if(!method_exists($api,$this->serviceName)){
+                    $this->throwError(API_DOES_NOT_EXIST,"API does not exist.");
+                }
+                $rMethod->invoke($api);
+            } catch (Exception $e) {
+                $this->throwError(API_DOES_NOT_EXIST, "API does not exist.");
+            }
+        }
+
+        
+        
         // mostrar erro da requisicao, em json
         public function throwError($code,$message){
             header("content-type: application/json");
             $errorMsg = json_encode(['error'=>['status'=>$code, 'message'=>$message]]);
             echo $errorMsg; exit;
         }
+
         // retornar resposta da requisicao, em json
         public function returnResponse($code,$data){
             header("content-type: application/json");
             $response=json_encode(['response'=>['status'=>$code,"result"=>$data]]);
             echo $response; exit;
         }
+
         // coletar header da autorizacao
         public function getAuthorizationHeader(){
             $headers=null;

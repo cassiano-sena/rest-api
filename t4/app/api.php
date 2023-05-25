@@ -30,7 +30,7 @@
                     'iat'=>time(),
                     'iss'=>'localhost',
                     'exp'=>time()+(15*60),
-                    'userId'=>$user['id']
+                    'id'=>$user['id']
                 ];
                 $token=JWT::encode($payload, SECRET_KEY);
                 $data=['token'=>$token];
@@ -45,14 +45,22 @@
             $email=$this->validateParameter('email',$this->param['email'],STRING,false);
             $telefone=$this->validateParameter('telefone',$this->param['telefone'],STRING,false);
             $senha=$this->validateParameter('senha',$this->param['senha'],STRING,false);
+            $isAdmin=$this->validateParameter('is_admin',$this->param['is_admin'],STRING,false);
+            $isDriver=$this->validateParameter('is_driver',$this->param['is_driver'],STRING,false);
+            $ativo=$this->validateParameter('ativo',$this->param['ativo'],STRING,false);
+            $status=$this->validateParameter('status',$this->param['status'],STRING,false);
 
             $usuario=new Usuario;
             $usuario->setNome($nome);
             $usuario->setEmail($email);
             $usuario->setTelefone($telefone);
             $usuario->setSenha($senha);
+            $usuario->setIsAdmin($isAdmin);
+            $usuario->setIsDriver($isDriver);
+            $usuario->setActive($ativo);
+            $usuario->setStatus($status);
             $usuario->setCreatedOn(date('Y-m-d'));
-            if($usuario->insert()){
+            if(!$usuario->insert()){
                 $message='Failed to insert.';
             }else{
                 $message="Inserted successfully.";                
@@ -61,15 +69,15 @@
 
         // pegar detalhes do usuario a partir do id
         public function getUsuarioDetails() {
-			$usuarioId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$id = $this->validateParameter('id', $this->param['id'], INTEGER);
 
 			$aux = new Usuario;
-			$aux->setId($usuarioId);
+			$aux->setId($id);
 			$usuario = $aux->getUsuarioById();
 			if(!is_array($usuario)) {
 				$this->returnResponse(SUCCESS_RESPONSE, ['message' => 'User details not found.']);
 			}
-
+            //print_r($usuario);exit;
 			$response['id']=$usuario['id'];
 			$response['nome']=$usuario['nome'];
 			$response['email']=$usuario['email'];
@@ -111,7 +119,7 @@
             $rota->setDatas($datas);
             $rota->setHorarios($horarios);
             $rota->setCreatedOn(date('Y-m-d'));
-            if($rota->insert()){
+            if(!$rota->insert()){
                 $message='Failed to insert.';
             }else{
                 $message="Inserted successfully.";                
@@ -172,7 +180,7 @@
             $mensagem->setDescricao($descricao);
             $mensagem->setStatus($status);
             $mensagem->setCreatedOn(date('Y-m-d'));
-            if($mensagem->insert()){
+            if(!$mensagem->insert()){
                 $message='Failed to insert.';
             }else{
                 $message="Inserted successfully.";                
