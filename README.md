@@ -54,7 +54,7 @@ Se o token for válido, você terá acesso por 15 minutos
 
 
 
-//Para gerenciar usuários
+*Para gerenciar usuários (os valores podem ser trocados)
 
 Criar
 >{
@@ -108,7 +108,7 @@ Remover
 
 
 
-//Para gerenciar rotas
+*Para gerenciar rotas (os valores podem ser trocados)
 
 Criar
 >{
@@ -155,7 +155,7 @@ Remover
 
 
 
-//Para gerenciar mensagens
+*Para gerenciar mensagens (os valores podem ser trocados)
 
 Criar
 >{
