@@ -1,5 +1,6 @@
 # Programação Web
 pw_t4 redo backend only
+(não possui swagger)
 
 
 * Para habilitar/desabilitar o modo de POST-ONLY, descomentar em 'rest.api' linhas 14-16;
