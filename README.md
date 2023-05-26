@@ -7,22 +7,21 @@ pw_t4 redo backend only
 
 
 >Necessidades:
-PHP 8,
-
-Servidor local (Foi utilizado XAMPP para a execução do trabalho),
-*Thunder Client,
-*Alguma IDE (Foi utilizado o VSCode)
+-PHP 8,
+-Servidor local (Foi utilizado XAMPP para a execução do trabalho),
+-Thunder Client,
+-Alguma IDE (Foi utilizado o VSCode)
 (Caso utilizar o XAMPP, colocar a pasta do projeto no diretório 'htdocs'!)
 
 >Passo a passo:
-*Entre na pasta 'db/' e copie um dos arquivos '.sql' (use o '-drop' para derrubar o banco). Depois, entre em 'localhost/phpmyadmin' ou 'http://127.0.0.1/phpmyadmin' e execute o SQL.
-*Após preparar o ambiente (php,servidor,thunder client):
-Checar se possui conexão com o banco, abra uma nova requisição com o link do seu diretório, com o caminho até o arquivo 'dbconnect.php'.
-*Com uma conexão estável, retire o 'dbconnect.php' e deixe apenas na pasta 'app'.
+-Entre na pasta 'db/' e copie um dos arquivos '.sql' (use o '-drop' para derrubar o banco). Depois, entre em 'localhost/phpmyadmin' ou 'http://127.0.0.1/phpmyadmin' e execute o SQL.
+-Após preparar o ambiente (php,servidor,thunder client):
+-Checar se possui conexão com o banco, abra uma nova requisição com o link do seu diretório, com o caminho até o arquivo 'dbconnect.php'.
+-Com uma conexão estável, retire o 'dbconnect.php' e deixe apenas na pasta 'app'.
 
 Para gerar um token: 
 (senha está sem case-sensitivity)
-*Copie e cole um dos endpoints abaixo
+Copie e cole um dos endpoints abaixo
 
 >{
   "name": "generateToken",
@@ -44,12 +43,12 @@ Para gerar um token:
 
 
 *Copie o Token gerado 
-*Vá para 'Headers', no mesmo local
-*Escreva "Content-Type" "application/json"
-*Escreva "Authorization" "Bearer (token)", logo abaixo
+1-Vá para 'Headers', no mesmo local
+2-Escreva "Content-Type" "application/json"
+3-Escreva "Authorization" "Bearer (token)", logo abaixo
 
 Se o token for válido, você terá acesso por 15 minutos
-*Agora é possível utilizar o programa!
+-Agora é possível utilizar o programa!
 
 Para gerenciar usuários (os valores podem ser trocados)
 
