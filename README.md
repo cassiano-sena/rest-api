@@ -9,7 +9,7 @@ pw_t4 redo backend only
 >Necessidades:
 PHP 8,
 
-*Servidor local (Foi utilizado XAMPP para a execução do trabalho),
+Servidor local (Foi utilizado XAMPP para a execução do trabalho),
 *Thunder Client,
 *Alguma IDE (Foi utilizado o VSCode)
 (Caso utilizar o XAMPP, colocar a pasta do projeto no diretório 'htdocs'!)
@@ -51,10 +51,9 @@ Para gerar um token:
 Se o token for válido, você terá acesso por 15 minutos
 *Agora é possível utilizar o programa!
 
+Para gerenciar usuários (os valores podem ser trocados)
 
 
-
-*Para gerenciar usuários (os valores podem ser trocados)
 
 Criar
 >{
@@ -105,10 +104,9 @@ Remover
 }
 
 
+Para gerenciar rotas (os valores podem ser trocados)
 
 
-
-*Para gerenciar rotas (os valores podem ser trocados)
 
 Criar
 >{
@@ -153,9 +151,8 @@ Remover
   }
 }
 
+Para gerenciar mensagens (os valores podem ser trocados)
 
-
-*Para gerenciar mensagens (os valores podem ser trocados)
 
 Criar
 >{
