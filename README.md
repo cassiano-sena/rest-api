@@ -1,10 +1,10 @@
 # rest-api
 pw_t4 redo backend only
 
-/**
+
 * Para habilitar/desabilitar o modo de POST-ONLY, descomentar em 'rest.api' linhas 14-16;
 * Caso haja problema na conexão com o banco, troque a senha da database em dbconnect.php
-*/
+
 
 >Necessidades:
 *PHP 8,
