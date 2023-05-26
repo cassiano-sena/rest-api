@@ -54,8 +54,9 @@ Se o token for válido, você terá acesso por 15 minutos
 
 
 //Para gerenciar usuários
-//OK
-{
+
+Criar
+>{
   "name": "addUsuario",
   "param": {
     "nome": "1",
@@ -69,16 +70,16 @@ Se o token for válido, você terá acesso por 15 minutos
   }
 }
 
-//OK
-{
+Ler
+>{
   "name": "getUsuarioDetails",
   "param": {
     "usuario_id":1
   }
 }
 
-//OK
-{
+Atualizar
+>{
   "name": "updateUsuario",
   "param": {
     "usuario_id": "1",
@@ -94,8 +95,8 @@ Se o token for válido, você terá acesso por 15 minutos
   }
 }
 
-//OK
-{
+Remover
+>{
   "name": "deleteUsuario",
   "param": {
     "usuario_id": ""
@@ -107,8 +108,9 @@ Se o token for válido, você terá acesso por 15 minutos
 
 
 //Para gerenciar rotas
-//OK
-{
+
+Criar
+>{
   "name": "addRota",
   "param": {
     "rota": "1",
@@ -120,16 +122,16 @@ Se o token for válido, você terá acesso por 15 minutos
   }
 }
 
-//OK
-{
+Ler
+>{
   "name": "getRotaDetails",
   "param": {
     "rota_id": ""
   }
 }
 
-//OK
-{
+Atualizar
+>{
   "name": "updateRota",
   "param": {
     "rota_id": "1",
@@ -142,8 +144,8 @@ Se o token for válido, você terá acesso por 15 minutos
   }
 }
 
-//OK
-{
+Remover
+>{
   "name": "deleteRota",
   "param": {
     "rota_id": "3"
@@ -152,11 +154,10 @@ Se o token for válido, você terá acesso por 15 minutos
 
 
 
-
-
 //Para gerenciar mensagens
-//OK
-{
+
+Criar
+>{
   "name": "addMensagem",
   "param": {
     "usuario": "1",
@@ -166,16 +167,16 @@ Se o token for válido, você terá acesso por 15 minutos
   }
 }
 
-//OK
-{
+Ler
+>{
   "name": "getMensagemDetails",
   "param": {
     "mensagem_id": "3"
   }
 }
 
-//OK
-{
+Atualizar
+>{
   "name": "updateMensagem",
   "param": {
     "mensagem_id": "3",
@@ -188,9 +189,8 @@ Se o token for válido, você terá acesso por 15 minutos
   }
 }
 
-
-//OK
-{
+Remover
+>{
   "name": "deleteMensagem",
   "param": {
     "mensagem_id": ""
