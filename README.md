@@ -23,7 +23,7 @@ Para gerar um token:
 (senha está sem case-sensitivity)
 *Copie e cole um dos endpoints abaixo
 
-{
+>{
   "name": "generateToken",
   "param": {
     "email": "cassiano@email.com",
@@ -32,7 +32,7 @@ Para gerar um token:
 }
 
 
-{
+>{
   "name": "generateToken",
   "param": {
     "email": "eduardo@email.com",
