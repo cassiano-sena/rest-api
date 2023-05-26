@@ -17,7 +17,7 @@ pw_t4 redo backend only
 >Passo a passo:
 *Entre na pasta 'db/' e copie um dos arquivos '.sql' (use o '-drop' para derrubar o banco). Depois, entre em 'localhost/phpmyadmin' ou 'http://127.0.0.1/phpmyadmin' e execute o SQL.
 *Após preparar o ambiente (php,servidor,thunder client):
-*Cheque se possui conexão com o banco, abra uma nova requisição com o link do seu diretório, com o caminho até o arquivo 'dbconnect.php'.
+*Checar se possui conexão com o banco, abra uma nova requisição com o link do seu diretório, com o caminho até o arquivo 'dbconnect.php'.
 *Com uma conexão estável, retire o 'dbconnect.php' e deixe apenas na pasta 'app'.
 
 Para gerar um token: 
