@@ -1,24 +1,39 @@
-# rest-api
+# Programação Web
 pw_t4 redo backend only
 
-/**
-* Para habilitar o modo de POST-ONLY, descomentar 'rest.api' 14-16;
-*/
+
+* Para habilitar/desabilitar o modo de POST-ONLY, descomentar em 'rest.api' linhas 14-16;
+* Caso haja problema na conexão com o banco, troque a senha da database em dbconnect.php
 
 
+>Necessidades:
+*PHP 8,
 
+*Servidor local (Foi utilizado XAMPP para a execução do trabalho),
+*Thunder Client,
+*Alguma IDE (Foi utilizado o VSCode)
+(Caso utilizar o XAMPP, colocar a pasta do projeto no diretório 'htdocs'!)
+
+>Passo a passo:
+*Entre na pasta 'db/' e copie um dos arquivos '.sql' (use o '-drop' para derrubar o banco). Depois, entre em 'localhost/phpmyadmin' ou 'http://127.0.0.1/phpmyadmin' e execute o SQL.
+*Após preparar o ambiente (php,servidor,thunder client):
+*Checar se possui conexão com o banco, abra uma nova requisição com o link do seu diretório, com o caminho até o arquivo 'dbconnect.php'.
+*Com uma conexão estável, retire o 'dbconnect.php' e deixe apenas na pasta 'app'.
 
 Para gerar um token: 
 (senha está sem case-sensitivity)
+*Copie e cole um dos endpoints abaixo
 
-{
+>{
   "name": "generateToken",
   "param": {
     "email": "cassiano@email.com",
     "senha": "cassiano"
   }
 }
-{
+
+
+>{
   "name": "generateToken",
   "param": {
     "email": "eduardo@email.com",
@@ -28,22 +43,21 @@ Para gerar um token:
 
 
 
-
-
-Copiar o Token 
-Vá para 'Headers'
-Escreva "Content-Type" "application/json"
-Escreva "Authorization" "Bearer (token)"
+*Copie o Token gerado 
+*Vá para 'Headers', no mesmo local
+*Escreva "Content-Type" "application/json"
+*Escreva "Authorization" "Bearer (token)", logo abaixo
 
 Se o token for válido, você terá acesso por 15 minutos
-
+*Agora é possível utilizar o programa!
 
 
 
 
 //Para gerenciar usuários
-//OK
-{
+
+Criar
+>{
   "name": "addUsuario",
   "param": {
     "nome": "1",
@@ -53,39 +67,40 @@ Se o token for válido, você terá acesso por 15 minutos
     "is_admin": "0",
     "is_driver": "0",
     "is_active": "0",
-    "status": "A"
+    "usuario_status": "A"
   }
 }
 
-//TODO
-{
+Ler
+>{
   "name": "getUsuarioDetails",
   "param": {
-    "id": ""
+    "usuario_id":1
   }
 }
 
-//TODO
-{
+Atualizar
+>{
   "name": "updateUsuario",
   "param": {
-    "id": "",
-    "nome": "",
-    "email": "",
-    "telefone": "",
-    "senha": "",
-    "is_admin": "",
-    "is_driver": "",
-    "is_active": "",
-    "status": ""
+    "usuario_id": "1",
+    "nome": "2",
+    "email": "3",
+    "telefone": "4",
+    "senha": "5",
+    "is_admin": "0",
+    "is_driver": "0",
+    "is_active": "0",
+    "usuario_status": "A",
+    "created_on":""
   }
 }
 
-//OK
-{
+Remover
+>{
   "name": "deleteUsuario",
   "param": {
-    "id": "(id)"
+    "usuario_id": ""
   }
 }
 
@@ -94,8 +109,9 @@ Se o token for válido, você terá acesso por 15 minutos
 
 
 //Para gerenciar rotas
-//OK
-{
+
+Criar
+>{
   "name": "addRota",
   "param": {
     "rota": "1",
@@ -103,80 +119,81 @@ Se o token for válido, você terá acesso por 15 minutos
     "motorista": "3",
     "datas": "4",
     "horarios": "5",
-    "status": "A"
+    "rota_status": "A"
   }
 }
 
-//TODO
-{
+Ler
+>{
   "name": "getRotaDetails",
   "param": {
-    "id": "(id)"
+    "rota_id": ""
   }
 }
 
-//TODO
-{
+Atualizar
+>{
   "name": "updateRota",
   "param": {
-    "id": "",
+    "rota_id": "1",
     "rota": "0",
     "veiculo": "0",
     "motorista": "0",
     "datas": "0",
     "horarios": "0",
-    "status": "A"
+    "rota_status": "A"
   }
 }
 
-//OK
-{
+Remover
+>{
   "name": "deleteRota",
   "param": {
-    "id": ""
+    "rota_id": "3"
   }
 }
-
-
 
 
 
 //Para gerenciar mensagens
-//OK
-{
+
+Criar
+>{
   "name": "addMensagem",
   "param": {
     "usuario": "1",
     "rota": "1",
     "descricao": "a",
-    "status": "A"
+    "mensagem_status": "A"
   }
 }
 
-//TODO
-{
+Ler
+>{
   "name": "getMensagemDetails",
   "param": {
-    "id": ""
+    "mensagem_id": "3"
   }
 }
 
-//TODO
-{
+Atualizar
+>{
   "name": "updateMensagem",
   "param": {
-    "id": "",
+    "mensagem_id": "3",
     "usuario": "2",
     "rota": "2",
+    "mensagem_data": "",
+    "hora": "",
     "descricao": "B",
-    "status": "I"
+    "mensagem_status": "I"
   }
 }
 
-//OK
-{
+Remover
+>{
   "name": "deleteMensagem",
   "param": {
-    "id": ""
+    "mensagem_id": ""
   }
 }

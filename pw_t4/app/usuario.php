@@ -1,6 +1,6 @@
 <?php
     class Usuario{
-        private $id;
+        private $usuario_id;
         private $nome;
         private $email;
         private $telefone;
@@ -8,13 +8,13 @@
         private $isAdmin;
         private $isDriver;
         private $isActive;
-        private $status;
+        private $usuario_status;
         private $createdOn;
         private $tableName='tab_usuarios';
         private $dbConn;
 
-        function setId($id){$this->id=$id;}
-        function getId(){return $this->id;}
+        function setId($usuario_id){$this->usuario_id=$usuario_id;}
+        function getId(){return $this->usuario_id;}
         function setNome($nome){$this->nome=$nome;}
         function getNome(){return $this->nome;}
         function setEmail($email){$this->email=$email;}
@@ -29,8 +29,8 @@
         function getIsDriver(){return $this->isDriver;}
         function setIsActive($isActive){$this->isActive=$isActive;}
         function getIsActive(){return $this->isActive;}
-        function setStatus($status){$this->status=$status;}
-        function getStatus(){return $this->status;}
+        function setStatus($usuario_status){$this->usuario_status=$usuario_status;}
+        function getStatus(){return $this->usuario_status;}
         function setCreatedOn($createdOn){$this->createdOn=$createdOn;}
         function getCreatedOn(){return $this->createdOn;}
         function setTableName($tableName){$this->tableName=$tableName;}
@@ -53,16 +53,18 @@
 
         // listar um usuario
         public function getUsuarioById(){
-            $stmt=$this->dbConn->prepare('SELECT FROM '.$this->tableName.' WHERE id = :id');
-            $stmt->bindParam(':id',$this->id);
+            $stmt=$this->dbConn->prepare('SELECT * FROM '.$this->tableName.' WHERE usuario_id = :usuario_id');
+            $stmt->bindParam(':usuario_id',$this->usuario_id);
+            // print_r($stmt);exit;
             $stmt->execute();
             $usuario=$stmt->fetch(PDO::FETCH_ASSOC);
+            // $usuario=fetch_assoc($stmt);
             return $usuario;
         }
 
         // inserir no banco
         public function insert(){
-            $sql='INSERT INTO '.$this->tableName.' (id, nome, email, telefone, senha, is_admin, is_driver, is_active, status, created_on) VALUES(null, :nome, :email, :telefone, :senha, :is_admin, :is_driver, :is_active, :status, :created_on) ';
+            $sql='INSERT INTO '.$this->tableName.' (usuario_id, nome, email, telefone, senha, is_admin, is_driver, is_active, usuario_status, created_on) VALUES(null, :nome, :email, :telefone, :senha, :is_admin, :is_driver, :is_active, :usuario_status, :created_on) ';
             $stmt=$this->dbConn->prepare($sql);
             $stmt->bindParam(':nome',$this->nome);
             $stmt->bindParam(':email',$this->email);
@@ -71,7 +73,7 @@
             $stmt->bindParam(':is_admin',$this->isAdmin);
             $stmt->bindParam(':is_driver',$this->isDriver);
             $stmt->bindParam(':is_active',$this->isActive);
-            $stmt->bindParam(':status',$this->status);
+            $stmt->bindParam(':usuario_status',$this->usuario_status);
             $stmt->bindParam(':created_on',$this->createdOn);
 
             if($stmt->execute()){
@@ -83,9 +85,9 @@
 
         // atualizar no banco
         public function update(){
-            getId();
-            $sql="UPDATE $this->tableName SET";
-            // precisa necessariamente de id
+            // getId();
+            $sql="UPDATE ".$this->tableName." SET ";
+            // precisa necessariamente de usuario_id
             // caso nao informar, nao deixar em branco
             if(null!=$this->getNome()){
                 $sql.= " nome = '".$this->getNome()."',";
@@ -109,16 +111,17 @@
                 $sql.= " is_active = '".$this->getIsActive()."',";
             }
             if(null!=$this->getStatus()){
-                $sql.= " status = '".$this->getStatus()."',";
+                $sql.= " usuario_status = '".$this->getStatus()."'"; // retirar virgula
             }
-            // if(null!=$this->getCreatedOn()){
-            //     $sql.= " created_on = '".$this->getCreatedOn()."',";
-            // }
-            $sql.=" WHERE id = :id";
+            if(null!=$this->getCreatedOn()){
+                $sql.= " created_on = '".$this->getCreatedOn()."'"; // retirar virgula
+            }
+            $sql.=" WHERE usuario_id = :usuario_id; ";
 
             $stmt=$this->dbConn->prepare($sql);
-            $stmt->bindParam(':id',$this->id);
-
+            $stmt->bindParam(':usuario_id',$this->usuario_id);
+            
+            // print_r($stmt);exit;
             if($stmt->execute()){
                 return true;
             }else {
@@ -128,8 +131,8 @@
         
         // deletar no banco
         public function delete(){
-            $stmt= $this->dbConn->prepare('DELETE FROM '.$this->getTableName().' WHERE id = :id');
-            $stmt->bindParam(':id',$this->id);
+            $stmt= $this->dbConn->prepare('DELETE FROM '.$this->getTableName().' WHERE usuario_id = :usuario_id');
+            $stmt->bindParam(':usuario_id',$this->usuario_id);
 
             if($stmt->execute()){
                 return true;

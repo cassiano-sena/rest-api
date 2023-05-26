@@ -90,7 +90,7 @@ require_once('constants.php');
                 //esta funcionando!
                 $token=$this->getBearerToken();
                 $payload=JWT::decode($token,SECRET_KEY,['HS256']);
-                $stmt=$this->dbConn->prepare("SELECT * FROM tab_usuarios WHERE id = :userId");
+                $stmt=$this->dbConn->prepare("SELECT * FROM tab_usuarios WHERE usuario_id = :userId");
                 $stmt->bindParam(":userId",$payload->userId);
                 $stmt->execute();
                 $user=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -98,7 +98,7 @@ require_once('constants.php');
                 if(!is_array($user)){
                     $this->returnResponse(INVALID_USER_PASS, "This user was not found in the database.");
                 }
-                if($user['status']!=='A'){
+                if($user['usuario_status']!=='A'){
                     $this->returnResponse(LIMITED_USER_ACCESS, "This user access is limited. Please contact support for further information.");
                 }
                 $this->userId=$payload->userId;

@@ -22,7 +22,7 @@
                 if($user['is_active']==1){
                     $this->returnResponse(USER_IS_ACTIVE, "User is already active in the system.");
                 }
-                if($user['status']!=='A'){
+                if($user['usuario_status']!=='A'){
                     $this->returnResponse(LIMITED_USER_ACCESS, "User access is limited. Please contact support for further information.");
                 }
                 // valido por 15m
@@ -30,7 +30,7 @@
                     'iat'=>time(),
                     'iss'=>'localhost',
                     'exp'=>time()+(15*60),
-                    'userId'=>$user['id']
+                    'userId'=>$user['usuario_id']
                 ];
                 $token=JWT::encode($payload, SECRET_KEY);
                 $data=['token'=>$token];
@@ -48,7 +48,7 @@
             $is_admin=$this->validateParameter('is_admin',$this->param['is_admin'],STRING,false);
             $is_driver=$this->validateParameter('is_driver',$this->param['is_driver'],STRING,false);
             $is_active=$this->validateParameter('is_active',$this->param['is_active'],STRING,false);
-            $status=$this->validateParameter('status',$this->param['status'],STRING,false);
+            $usuario_status=$this->validateParameter('usuario_status',$this->param['usuario_status'],STRING,false);
 
             $aux=new Usuario;
             $aux->setNome($nome);
@@ -58,7 +58,7 @@
             $aux->setIsAdmin($is_admin);
             $aux->setIsDriver($is_driver);
             $aux->setIsActive($is_active);
-            $aux->setStatus($status);
+            $aux->setStatus($usuario_status);
             $aux->setCreatedOn(date('Y-m-d'));
             if(!$aux->insert()){
                 $message='Failed to insert.';
@@ -69,16 +69,16 @@
 
         // pegar detalhes do usuario a partir do id
         public function getUsuarioDetails() {
-			$usuarioId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$usuario_Id = $this->validateParameter('usuario_id', $this->param['usuario_id'], INTEGER);
 
 			$aux = new Usuario;
-			$aux->setId($usuarioId);
+			$aux->setId($usuario_Id);
 			$usuario = $aux->getUsuarioById();
 			if(!is_array($usuario)) {
 				$this->returnResponse(SUCCESS_RESPONSE, ['message' => 'User details not found.']);
 			}
 
-			$response['id']=$usuario['id'];
+			$response['usuario_id']=$usuario['usuario_id'];
 			$response['nome']=$usuario['nome'];
 			$response['email']=$usuario['email'];
 			$response['telefone']=$usuario['telefone'];
@@ -86,13 +86,13 @@
 			$response['is_admin']=$usuario['is_admin'];
 			$response['is_driver']=$usuario['is_driver'];
 			$response['is_active']=$usuario['is_active'];
-			$response['status']=$usuario['status'];
+			$response['usuario_status']=$usuario['usuario_status'];
 			$response['created_on']=$usuario['created_on'];
 			$this->returnResponse(SUCCESS_RESPONSE, $response);
 		}
         
         public function updateUsuario() {
-			$usuarioId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$usuario_id = $this->validateParameter('usuario_id', $this->param['usuario_id'], INTEGER);
 			$nome = $this->validateParameter('nome', $this->param['nome'], STRING, false);
 			$email = $this->validateParameter('email', $this->param['email'], STRING, false);
 			$telefone = $this->validateParameter('telefone', $this->param['telefone'], STRING, false);
@@ -100,10 +100,11 @@
             $is_admin = $this->validateParameter('is_admin', $this->param['is_admin'], STRING, false);
             $is_driver = $this->validateParameter('is_driver', $this->param['is_driver'], STRING, false);
             $is_active = $this->validateParameter('is_active', $this->param['is_active'], STRING, false);
-            $status = $this->validateParameter('status', $this->param['status'], STRING, false);
+            $usuario_status = $this->validateParameter('usuario_status', $this->param['usuario_status'], STRING, false);
+            $created_on = $this->validateParameter('created_on', $this->param['created_on'], STRING, false);
 
 			$aux = new Usuario;
-			$aux->setId($usuarioId);
+			$aux->setId($usuario_id);
 			$aux->setNome($nome);
 			$aux->setEmail($email);
 			$aux->setTelefone($telefone);
@@ -111,8 +112,10 @@
 			$aux->setIsAdmin($is_admin);
 			$aux->setIsDriver($is_driver);
 			$aux->setIsActive($is_active);
-			$aux->setStatus($status);
+			$aux->setStatus($usuario_status);
+            $aux->setCreatedOn($created_on);
 
+            // print_r($aux);exit;
 			if(!$aux->update()) {
 				$message = 'Failed to update.';
 			} else {
@@ -124,9 +127,9 @@
 
         // deletar usuario
         public function deleteUsuario() {
-			$usuarioId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$usuario_id = $this->validateParameter('usuario_id', $this->param['usuario_id'], INTEGER);
 			$aux=new Usuario;
-			$aux->setId($usuarioId);
+			$aux->setId($usuario_id);
 
 			if(!$aux->delete()) {
 				$message='Failed to delete.';
@@ -142,7 +145,7 @@
             $motorista=$this->validateParameter('motorista',$this->param['motorista'],STRING,false);
             $datas=$this->validateParameter('datas',$this->param['datas'],STRING,false);
             $horarios=$this->validateParameter('horarios',$this->param['horarios'],STRING,false);
-            $status=$this->validateParameter('status',$this->param['status'],STRING,false);
+            $rota_status=$this->validateParameter('rota_status',$this->param['rota_status'],STRING,false);
 
             $aux=new Rota;
             $aux->setRota($nomeRota);
@@ -150,7 +153,7 @@
             $aux->setMotorista($motorista);
             $aux->setDatas($datas);
             $aux->setHorarios($horarios);
-            $aux->setStatus($status);
+            $aux->setStatus($rota_status);
             $aux->setCreatedOn(date('Y-m-d'));
             if(!$aux->insert()){
                 $message='Failed to insert.';
@@ -161,7 +164,7 @@
 
         // pegar detalhes da rota a partir do id
         public function getRotaDetails() {
-			$rotaId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$rotaId = $this->validateParameter('rota_id', $this->param['rota_id'], INTEGER);
 
 			$aux = new Rota;
 			$aux->setId($rotaId);
@@ -170,35 +173,35 @@
 				$this->returnResponse(SUCCESS_RESPONSE, ['message' => 'Route details not found.']);
 			}
 
-			$response['id']=$rota['id'];
+			$response['rota_id']=$rota['rota_id'];
 			$response['rota']=$rota['rota'];
 			$response['veiculo']=$rota['veiculo'];
 			$response['motorista']=$rota['motorista'];
 			$response['datas']=$rota['datas'];
 			$response['horarios']=$rota['horarios'];
-			$response['status']=$rota['status'];
+			$response['rota_status']=$rota['rota_status'];
 			$response['created_on']=$rota['created_on'];
 			$this->returnResponse(SUCCESS_RESPONSE, $response);
 		}
 
           // atualizar mensagem
           public function updateRota() {
-			$rotaId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$rotaId = $this->validateParameter('rota_id', $this->param['rota_id'], INTEGER);
 			$rotaNome = $this->validateParameter('rota', $this->param['rota'], STRING, false);
 			$veiculo = $this->validateParameter('veiculo', $this->param['veiculo'], STRING, false);
 			$motorista = $this->validateParameter('motorista', $this->param['motorista'], INTEGER, false);
             $datas = $this->validateParameter('datas', $this->param['datas'], STRING, false);
             $horarios = $this->validateParameter('horarios', $this->param['horarios'], STRING, false);
-            $status = $this->validateParameter('status', $this->param['status'], STRING, false);
+            $rota_status = $this->validateParameter('rota_status', $this->param['rota_status'], STRING, false);
 
 			$aux = new Rota;
 			$aux->setId($rotaId);
-			$aux->setNome($rotaNome);
+			$aux->setRota($rotaNome);
 			$aux->setVeiculo($veiculo);
 			$aux->setMotorista($motorista);
 			$aux->setDatas($datas);
 			$aux->setHorarios($horarios);
-			$aux->setStatus($status);
+			$aux->setStatus($rota_status);
 
 			if(!$aux->update()) {
 				$message = 'Failed to update.';
@@ -211,7 +214,7 @@
 
         // deletar uma rota
         public function deleteRota() {
-			$rotaId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$rotaId = $this->validateParameter('rota_id', $this->param['rota_id'], INTEGER);
 			$rota=new Rota;
 			$rota->setId($rotaId);
 
@@ -226,20 +229,20 @@
         public function addMensagem(){
             $usuario=$this->validateParameter('usuario',$this->param['usuario'],STRING,false);
             $rota=$this->validateParameter('rota',$this->param['rota'],STRING,false);
-            //$data=$this->validateParameter('data',$this->param['data'],STRING,false);
+            //$mensagem_data=$this->validateParameter('mensagem_data',$this->param['mensagem_data'],STRING,false);
             //$hora=$this->validateParameter('hora',$this->param['hora'],STRING,false);
             $descricao=$this->validateParameter('descricao',$this->param['descricao'],STRING,false);
-            $status=$this->validateParameter('status',$this->param['status'],STRING,false);
+            $mensagem_status=$this->validateParameter('mensagem_status',$this->param['mensagem_status'],STRING,false);
 
             $aux=new Mensagem;
             $aux->setUsuario($usuario);
             $aux->setRota($rota);
-            //$aux->setData($data);
+            //$aux->setData($mensagem_data);
             $aux->setData(date('Y-m-d'));
             // $aux->setHora($hora);
             $aux->setHora(date('H:i:s'));
             $aux->setDescricao($descricao);
-            $aux->setStatus($status);
+            $aux->setStatus($mensagem_status);
             $aux->setCreatedOn(date('Y-m-d'));
             if(!$aux->insert()){
                 $message='Failed to insert.';
@@ -250,7 +253,7 @@
 
         // pegar detalhes de uma mensagem a partir do id
         public function getMensagemDetails() {
-			$mensagemId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$mensagemId = $this->validateParameter('mensagem_id', $this->param['mensagem_id'], INTEGER);
 
 			$aux = new Mensagem;
 			$aux->setId($mensagemId);
@@ -259,35 +262,35 @@
 				$this->returnResponse(SUCCESS_RESPONSE, ['message' => 'Message details not found.']);
 			}
 
-			$response['id']=$mensagem['id'];
+			$response['mensagem_id']=$mensagem['mensagem_id'];
 			$response['usuario']=$mensagem['usuario'];
 			$response['rota']=$mensagem['rota'];
-			$response['data']=$mensagem['data'];
+			$response['mensagem_data']=$mensagem['mensagem_data'];
 			$response['hora']=$mensagem['hora'];
 			$response['descricao']=$mensagem['descricao'];
-			$response['status']=$mensagem['status'];
+			$response['mensagem_status']=$mensagem['mensagem_status'];
 			$response['created_on']=$mensagem['created_on'];
 			$this->returnResponse(SUCCESS_RESPONSE, $response);
 		}
 
         // atualizar mensagem
         public function updateMensagem() {
-			$mensagemId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$mensagemId = $this->validateParameter('mensagem_id', $this->param['mensagem_id'], INTEGER);
 			$usuario = $this->validateParameter('usuario', $this->param['usuario'], STRING, false);
 			$rota = $this->validateParameter('rota', $this->param['rota'], STRING, false);
-			$data = $this->validateParameter('data', $this->param['data'], STRING, false);
+			$mensagem_data = $this->validateParameter('mensagem_data', $this->param['mensagem_data'], STRING, false);
             $hora = $this->validateParameter('hora', $this->param['hora'], STRING, false);
             $descricao = $this->validateParameter('descricao', $this->param['descricao'], STRING, false);
-            $status = $this->validateParameter('status', $this->param['status'], STRING, false);
+            $mensagem_status = $this->validateParameter('mensagem_status', $this->param['mensagem_status'], STRING, false);
 
 			$aux = new Mensagem;
 			$aux->setId($mensagemId);
 			$aux->setUsuario($usuario);
 			$aux->setRota($rota);
-			$aux->setData($data);
+			$aux->setData($mensagem_data);
 			$aux->setHora($hora);
 			$aux->setDescricao($descricao);
-			$aux->setStatus($status);
+			$aux->setStatus($mensagem_status);
 
 			if(!$aux->update()) {
 				$message = 'Failed to update.';
@@ -300,7 +303,7 @@
 
         // deletar mensagem
         public function deleteMensagem() {
-			$mensagemId = $this->validateParameter('id', $this->param['id'], INTEGER);
+			$mensagemId = $this->validateParameter('mensagem_id', $this->param['mensagem_id'], INTEGER);
 			$mensagem=new Mensagem;
 			$mensagem->setId($mensagemId);
 
