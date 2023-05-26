@@ -14,7 +14,7 @@ pw_t4 redo backend only
 -Alguma IDE (Foi utilizado o VSCode)
 (Caso utilizar o XAMPP, colocar a pasta do projeto no diretório 'htdocs'!)
 
->Passo a passo:
+Passo a passo:
 -Entre na pasta 'db/' e copie um dos arquivos '.sql' (use o '-drop' para derrubar o banco). Depois, entre em 'localhost/phpmyadmin' ou 'http://127.0.0.1/phpmyadmin' e execute o SQL.
 -Após preparar o ambiente (php,servidor,thunder client):
 -Checar se possui conexão com o banco, abra uma nova requisição com o link do seu diretório, com o caminho até o arquivo 'dbconnect.php'.
